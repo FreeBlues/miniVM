@@ -7,7 +7,7 @@ program = {"PSH", "5", "PSH", "6", "ADD", "POP", "HLT"}
 
 -- 指令指针, 栈顶指针, 栈数组
 IP = 1
-SP = -1
+SP = 0
 stack = {}
 
 -- 取指令函数
