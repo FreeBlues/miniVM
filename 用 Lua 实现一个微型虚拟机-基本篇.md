@@ -515,7 +515,7 @@ function eval(instr)
 		IP = IP + 1
 		stack[SP] = program[IP]
 	elseif instr == "POP" then
-		-- 这里处理 POP 指令, 具体处理后面添加 
+		-- 这里处理 POP 指令, 具体处理如下 
 		local val_popped = stack[SP]
 		SP = SP - 1  
 	elseif instr == "ADD" then  
