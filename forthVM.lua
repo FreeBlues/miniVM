@@ -34,12 +34,18 @@ _F["DUP"] = function () push(DS, DS[DS.n]) end
 _F["*"]   = function () push(DS, pop(DS) * pop(DS)) end
 _F["."]   = function () print(" "..pop(DS)) end
 
+-- 对于以 %L 打头的代码行, 直接对本行剩余内容进行求值, 提供了一种动态加载字典内容的途径
+_F["%L"] = function () eval(parseRestOfLine()) end
+
+-- 对于位于 [L ... L] 之内的代码块的处理
+_F["[L"] = function () eval(parser("^(.-)%sL]()")) end
+
 
 -- 定义模式表
 modes = {}
 mode = "interpret"
 
--- 分别处理原语,非原语,数字的函数
+-- 分别处理当前字 word 为原语,非原语,数字的函数
 interpretPrimitive = function ()
     if type(_F[word]) == "function" then _F[word](); return true end
   end
@@ -49,13 +55,13 @@ printStatusInterpret = function () end
 
 -- 定义 interpret 模式的具体行为
 modes.interpret = function ()
-	-- 从 subj 中依次取得当前字, 若没有则使用空串 ""
+	-- 从 subj 中依次取得当前字, 若没有则使用空串 "" 表示已执行到程序末尾
 	word = getWordOrNewline() or ""
 	printStatusInterpret()
 	local _ = interpretPrimitive() or
-				interpretNonPrimitive() or
-				interpretNumber() or
-				print("Can't interpret: "..word)
+		interpretNonPrimitive() or
+		interpretNumber() or
+		print("Can't interpret: "..word)
 end
 
 -- 虚拟机主循环函数
