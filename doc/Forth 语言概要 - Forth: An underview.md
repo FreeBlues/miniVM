@@ -241,25 +241,7 @@ SUN 公司把 `Forth` 用于它的工作站可编程 `Boot ROM` 中，以每天 
 
 下面是一个典型的 ``Forth`` 源程序块。这个应用程序用来控制 `8` 个 `LED` 提示灯，它也说明了 ``Forth`` 定义是如何组合以形成应用环境的。
 
-```
-Block: 180
-0:	( LED control )
-1:	HEX 40 CONSTANT LIGHTS DECIMAL
-2:	: LIGHT ( n -- ) LIGHTS OUTPUT ;
-3:	 
-4:	VARIABLE DELAY
-5:	: SLOW 500 DELAY ! ;
-6:	: FAST 100 DELAY ! ;
-7:	: COUNTS 256 0 DO I LIGHT DELAY @ MS LOOP ;
-8:	 
-9:	: LAMP ( n -- ) CREATE , DOES> ( a -- n ) @ ;
-10:	1 LAMP POWER      2 LAMP HV       4 LAMP TORCH
-11:	8 LAMP SAMPLING  16 LAMP IDLING
-12:	 
-13:	VARIABLE LAMPS    0 LAMPS !
-14:	: LAMP-ON  ( n -- )        LAMPS @  OR DUP LAMPS ! LIGHT ;
-15:	: LAMP-OFF ( n -- ) INVERT LAMPS @ AND DUP LAMPS ! LIGHT ;  
-```
+![](./pic/forth5.gif)
 
 -	`图 5` 一个源程序块
 
