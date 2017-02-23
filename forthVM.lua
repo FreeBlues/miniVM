@@ -29,7 +29,7 @@ pop  = function (stack) local x = stack[stack.n]; stack[stack.n] = nil;
 _F = {}
 _F["\n"] = function () end
 _F[""]   = function () mode = "stop" end
-_F["5"]   = function () push(DS, 5) end
+--_F["5"]   = function () push(DS, 5) end
 _F["DUP"] = function () push(DS, DS[DS.n]) end
 _F["*"]   = function () push(DS, pop(DS) * pop(DS)) end
 _F["."]   = function () print(" "..pop(DS)) end
