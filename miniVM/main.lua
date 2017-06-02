@@ -24,6 +24,15 @@ function love.keyreleased(key)
     if key == "s" then
         step = true
     end
+
+    if key == "q" then
+        love.event.quit(0)
+    end
+
+    if key == "r" then
+        love.event.quit("restart")
+    end
+
 end
 
 
@@ -39,7 +48,7 @@ function love.update(dt)
 end
 
 function love.draw()
-    --love.graphics.print("Welcome to our miniVM!", 400, 300)
+    love.graphics.print("Welcome to our miniVM!\n\n's': step\n'r': reload\n'q': quit", 300, 100)
     drawMemory()
     drawStack()
 end
